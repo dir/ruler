@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: read
+  pull-requests: write
 
 jobs:
   apply-ruler:
@@ -39,15 +39,34 @@ jobs:
       - name: Run ruler apply
         run: node dist/cli/index.js apply --no-gitignore --no-backup --agents=agentsmd,copilot
 
-      - name: Commit and push changes
+      - name: Create PR for generated changes
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             # Configure committer identity (author is set explicitly via --author)
             git config user.name "Ruler"
             git config user.email "ruler+workflow@okigu.com"
+            branch="ruler/ai-agent-rules"
+            git checkout -B "$branch"
             git add .
             git commit -m "Ruler: updating AI agent rules" --author="Ruler <ruler+workflow@okigu.com>" || echo "No changes to commit"
-            git push
+            git push --force-with-lease --set-upstream origin "$branch"
+
+            pr_number=$(gh pr list --base main --head "$branch" --state open --json number --jq '.[0].number')
+            if [ -z "$pr_number" ]; then
+              printf '%s\n\n%s\n' \
+                "Automated update from the Ruler Apply workflow." \
+                "This PR contains generated changes to repository AI agent instruction files." \
+                > /tmp/ruler-pr-body.md
+              gh pr create \
+                --base main \
+                --head "$branch" \
+                --title "Ruler: update AI agent rules" \
+                --body-file /tmp/ruler-pr-body.md
+            else
+              echo "Updated existing PR #$pr_number"
+            fi
           else
             echo "No changes"
           fi
