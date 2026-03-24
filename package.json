@@ -1,6 +1,6 @@
 {
   "name": "@luke-davis/ruler",
-  "version": "0.3.37",
+  "version": "0.3.38",
   "description": "Ruler — apply the same rules to all coding agents",
   "main": "dist/lib.js",
   "scripts": {
@@ -52,6 +52,7 @@
     "ruler": "dist/cli/index.js"
   },
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
     "@types/iarna__toml": "^2.0.5",
     "@types/jest": "^29.5.14",
     "@types/js-yaml": "^4.0.9",
