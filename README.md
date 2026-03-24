@@ -98,13 +98,13 @@ Requires Node.js `^20.19.0 || ^22.12.0 || >=23`.
 **Global Installation (Recommended for CLI use):**
 
 ```bash
-npm install -g @luke-davis/ruler
+pnpm add -g @luke-davis/ruler
 ```
 
-**Using `npx` (for one-off commands):**
+**Using `pnpm dlx` (for one-off commands):**
 
 ```bash
-npx @luke-davis/ruler apply
+pnpm dlx @luke-davis/ruler apply
 ```
 
 ### Project Initialisation
@@ -819,14 +819,14 @@ This creates context-specific instructions for different parts of your project w
 2. Describe primary data structures in `.ruler/data_models.md`
 3. Run `ruler apply` to help AI tools provide more relevant suggestions
 
-### Integration with NPM Scripts
+### Integration with Package Scripts
 
 ```json
 {
   "scripts": {
     "ruler:apply": "ruler apply",
-    "dev": "npm run ruler:apply && your_dev_command",
-    "precommit": "npm run ruler:apply"
+    "dev": "pnpm run ruler:apply && your_dev_command",
+    "precommit": "pnpm run ruler:apply"
   }
 }
 ```
@@ -845,16 +845,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+          run_install: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install Ruler
-        run: npm install -g @luke-davis/ruler
+          node-version: '22.12.0'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
 
       - name: Apply Ruler configuration
-        run: ruler apply --no-gitignore
+        run: pnpm exec ruler apply --no-gitignore
 
       - name: Check for uncommitted changes
         run: |
@@ -871,8 +873,9 @@ jobs:
 
 **"Cannot find module" errors:**
 
-- Ensure Ruler is installed globally: `npm install -g @luke-davis/ruler`
-- Or use `npx @luke-davis/ruler`
+- Ensure Ruler is installed globally: `pnpm add -g @luke-davis/ruler`
+- Or use `pnpm dlx @luke-davis/ruler`
+- npm equivalents also work if your environment is already standardized on npm
 
 **Permission denied errors:**
 
@@ -943,32 +946,42 @@ A: Yes. Kiro receives concatenated rules at `.kiro/steering/ruler_kiro_instructi
 ```bash
 git clone https://github.com/dir/ruler.git
 cd ruler
-npm install
-npm run build
+corepack enable
+pnpm install
+pnpm run build
 ```
 
 ### Testing
 
 ```bash
 # Run all tests
-npm test
+pnpm test
 
 # Run tests with coverage
-npm run test:coverage
+pnpm run test:coverage
 
 # Run tests in watch mode
-npm run test:watch
+pnpm run test:watch
 ```
 
 ### Code Quality
 
 ```bash
 # Run linting
-npm run lint
+pnpm run lint
 
 # Run formatting
-npm run format
+pnpm run format
 ```
+
+### Release Flow
+
+1. Create a feature branch from `main`.
+2. Open a pull request back into `main`.
+3. Merge once CI is green.
+4. Bump `package.json` to the next version on `main`.
+5. Create and push a matching tag like `v0.3.38`.
+6. The release workflow publishes that exact version to npm after confirming the tag matches `package.json`.
 
 ## Contributing
 

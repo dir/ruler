@@ -2,6 +2,7 @@ name: Ruler Apply
 
 on:
   push:
+    branches: [main]
   workflow_dispatch: {}
 
 permissions:
@@ -10,7 +11,7 @@ permissions:
 
 jobs:
   apply-ruler:
-    if: ${{ !contains(github.event.head_commit.message, 'Ruler:') }}
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, 'Ruler:') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,15 +19,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+          run_install: false
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          check-latest: true
+          node-version: '22.12.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Run ruler apply
-        run: |
-          npx -y @intellectronica/ruler@latest apply --no-gitignore --no-backup --agents=agentsmd,copilot
+        run: pnpm exec ruler apply --no-gitignore --no-backup --agents=agentsmd,copilot
 
       - name: Commit and push changes
         run: |
