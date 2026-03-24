@@ -4,13 +4,13 @@
   <tr>
     <td style="vertical-align: top;">
       <p>
-        <a href="https://github.com/intellectronica/ruler/actions/workflows/ci.yml"><img src="https://github.com/intellectronica/ruler/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-        <a href="https://www.npmjs.com/package/@intellectronica/ruler"><img src="https://badge.fury.io/js/%40intellectronica%2Fruler.svg" alt="npm version"></a>
+        <a href="https://github.com/dir/ruler/actions/workflows/ci.yml"><img src="https://github.com/dir/ruler/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+        <a href="https://www.npmjs.com/package/@luke-davis/ruler"><img src="https://badge.fury.io/js/%40luke-davis%2Fruler.svg" alt="npm version"></a>
         <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
       </p>
       <ul>
-        <li><strong>GitHub</strong>: <a href="https://github.com/intellectronica/ruler">intellectronica/ruler</a></li>
-        <li><strong>NPM</strong>: <a href="https://www.npmjs.com/package/@intellectronica/ruler">@intellectronica/ruler</a></li>
+        <li><strong>GitHub</strong>: <a href="https://github.com/dir/ruler">dir/ruler</a></li>
+        <li><strong>NPM</strong>: <a href="https://www.npmjs.com/package/@luke-davis/ruler">@luke-davis/ruler</a></li>
       </ul>
       <hr />
       <p>
@@ -28,7 +28,7 @@
 > **Beta Research Preview**
 >
 > - Please test this version carefully in your environment
-> - Report issues at https://github.com/intellectronica/ruler/issues
+> - Report issues at https://github.com/dir/ruler/issues
 
 ## Why Ruler?
 
@@ -98,13 +98,13 @@ Requires Node.js `^20.19.0 || ^22.12.0 || >=23`.
 **Global Installation (Recommended for CLI use):**
 
 ```bash
-npm install -g @intellectronica/ruler
+npm install -g @luke-davis/ruler
 ```
 
 **Using `npx` (for one-off commands):**
 
 ```bash
-npx @intellectronica/ruler apply
+npx @luke-davis/ruler apply
 ```
 
 ### Project Initialisation
@@ -851,7 +851,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Ruler
-        run: npm install -g @intellectronica/ruler
+        run: npm install -g @luke-davis/ruler
 
       - name: Apply Ruler configuration
         run: ruler apply --no-gitignore
@@ -871,8 +871,8 @@ jobs:
 
 **"Cannot find module" errors:**
 
-- Ensure Ruler is installed globally: `npm install -g @intellectronica/ruler`
-- Or use `npx @intellectronica/ruler`
+- Ensure Ruler is installed globally: `npm install -g @luke-davis/ruler`
+- Or use `npx @luke-davis/ruler`
 
 **Permission denied errors:**
 
@@ -941,7 +941,7 @@ A: Yes. Kiro receives concatenated rules at `.kiro/steering/ruler_kiro_instructi
 ### Setup
 
 ```bash
-git clone https://github.com/intellectronica/ruler.git
+git clone https://github.com/dir/ruler.git
 cd ruler
 npm install
 npm run build
@@ -981,7 +981,7 @@ Contributions are welcome! Please:
 5. Ensure all tests pass
 6. Submit a pull request
 
-For bugs and feature requests, please [open an issue](https://github.com/intellectronica/ruler/issues).
+For bugs and feature requests, please [open an issue](https://github.com/dir/ruler/issues).
 
 ## License
 
