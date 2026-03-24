@@ -5,13 +5,13 @@
   "main": "dist/lib.js",
   "scripts": {
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\" \".github/workflows/*.{yml,yaml}\" \".github/**/*.md\" \".ruler/**/*.md\" \"*.{js,json,md,mjs}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:integration": "jest tests/e2e/ruler.integration.test.ts --verbose",
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "tsc"
   },
   "repository": {
     "type": "git",
@@ -38,8 +38,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "packageManager": "pnpm@10.32.1",
   "engines": {
-    "node": "^20.19.0 || ^22.12.0 || >=23"
+    "node": "^20.19.0 || ^22.12.0 || >=23",
+    "pnpm": ">=10"
   },
   "files": [
     "dist",
