@@ -2,10 +2,45 @@
   "name": "@luke-davis/ruler",
   "version": "0.3.38",
   "description": "Ruler — apply the same rules to all coding agents",
+  "keywords": [
+    "ai",
+    "aider",
+    "automation",
+    "claude",
+    "codex",
+    "config",
+    "copilot",
+    "cursor",
+    "developer-tools",
+    "rules"
+  ],
+  "homepage": "https://github.com/dir/ruler#readme",
+  "bugs": {
+    "url": "https://github.com/dir/ruler/issues"
+  },
+  "license": "MIT",
+  "author": "Eleanor Berger",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dir/ruler.git"
+  },
+  "bin": {
+    "ruler": "dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "main": "dist/lib.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\" \".github/workflows/*.{yml,yaml}\" \".github/**/*.md\" \".ruler/**/*.md\" \"*.{js,json,md,mjs}\"",
+    "lint": "oxlint --deny-warnings src",
+    "lint:fix": "oxlint --fix src",
+    "format": "oxfmt src .github .ruler README.md AGENTS.md package.json jest.config.js jest.setup.js tsconfig.json",
+    "format:check": "oxfmt --check src .github .ruler README.md AGENTS.md package.json jest.config.js jest.setup.js tsconfig.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -13,66 +48,27 @@
     "build": "tsc",
     "prepare": "tsc"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dir/ruler.git"
-  },
-  "keywords": [
-    "ai",
-    "developer-tools",
-    "copilot",
-    "codex",
-    "claude",
-    "cursor",
-    "aider",
-    "config",
-    "rules",
-    "automation"
-  ],
-  "author": "Eleanor Berger",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dir/ruler/issues"
-  },
-  "homepage": "https://github.com/dir/ruler#readme",
-  "publishConfig": {
-    "access": "public"
-  },
-  "packageManager": "pnpm@10.32.1",
-  "engines": {
-    "node": "^20.19.0 || ^22.12.0 || >=23",
-    "pnpm": ">=10"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "bin": {
-    "ruler": "dist/cli/index.js"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.38.0",
-    "@types/iarna__toml": "^2.0.5",
-    "@types/jest": "^29.5.14",
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^24.9.2",
-    "@types/yargs": "^17.0.34",
-    "@typescript-eslint/eslint-plugin": "^8.46.2",
-    "@typescript-eslint/parser": "^8.46.2",
-    "eslint": "^9.38.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "jest": "^29.7.0",
-    "prettier": "^3.6.2",
-    "ts-jest": "^29.4.5",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2"
-  },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
     "js-yaml": "^4.1.0",
     "yargs": "^18.0.0",
     "zod": "^4.1.12"
-  }
+  },
+  "devDependencies": {
+    "@types/iarna__toml": "^2.0.5",
+    "@types/jest": "^29.5.14",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.9.2",
+    "@types/yargs": "^17.0.34",
+    "jest": "^29.7.0",
+    "oxfmt": "^0.42.0",
+    "oxlint": "^1.57.0",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=23",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.32.1"
 }

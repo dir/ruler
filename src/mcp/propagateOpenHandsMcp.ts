@@ -122,7 +122,7 @@ export async function propagateMcpToOpenHands(
   } = {};
   try {
     const tomlContent = await fs.readFile(openHandsConfigPath, 'utf8');
-    config = parseTOML(tomlContent);
+    config = parseTOML(tomlContent) as typeof config;
   } catch {
     // File doesn't exist, we'll create it.
   }

@@ -17,6 +17,7 @@ Review the entire codebase and the existing `README.md` to ensure the README acc
 ## Scope of Verification (Systematically check these against the repository)
 
 For each item below, compare what is stated in `README.md` vs. what actually exists in the repo:
+
 - Project purpose / high-level description
 - Installation instructions (package name, build/compile steps, Node/TypeScript details)
 - Runtime requirements (Node version, dependencies)
@@ -25,7 +26,7 @@ For each item below, compare what is stated in `README.md` vs. what actually exi
 - Supported agents / integrations (list matches actual implemented agents under `src/agents/`)
 - File/directory structure examples (ensure paths reflect reality)
 - MCP (Model Context Protocol) related behavior & limitations
-- Backup / safety / overwrite behavior (as implied by tests like *backup-option*, *duplication-fix*, etc.)
+- Backup / safety / overwrite behavior (as implied by tests like _backup-option_, _duplication-fix_, etc.)
 - Workflow / automation references (validate against existing scripts or absence thereof)
 - Any referenced scripts, binaries, or examples (ensure they exist and match names)
 - License reference (ensure it matches `LICENSE`)
@@ -33,7 +34,9 @@ For each item below, compare what is stated in `README.md` vs. what actually exi
 - Status / stability indicators (only keep if still true)
 
 ## Evidence Sources
+
 Use (non-destructively) the following directories & files to ground truth:
+
 - `src/` (implementations, constants, types, agents)
 - `tests/` (behavioral expectations, supported options, edge cases)
 - `package.json` (name, version, scripts, engines, dependencies, bin entries)
@@ -42,12 +45,14 @@ Use (non-destructively) the following directories & files to ground truth:
 ## Change Decision Rules
 
 Propose a change ONLY if one of these is true:
+
 - README claims something absent from the codebase.
 - README omits a clearly essential, currently implemented behavior that users must know to use existing features.
 - A command / option / filename / path is outdated or renamed.
 - Formatting obscures readability (mis-nested lists, broken code fences, ambiguous inline code vs prose).
 
 ## Explicitly DO NOT
+
 - Add new feature ideas.
 - Rewrite stylistically for preference alone.
 - Expand sections with tangential info.
@@ -57,6 +62,7 @@ Propose a change ONLY if one of these is true:
 ## If no changes: don't make any modifications to the file.
 
 Process You Must Follow (Sequential)
+
 1. Scan repository to build an internal fact map.
 2. Parse current `README.md` into sections (record order; reuse it).
 3. For each section, mark: accurate / outdated / missing detail / formatting issue.
@@ -67,6 +73,7 @@ Process You Must Follow (Sequential)
 8. Create pull request with a detailed list of everything changed and why.
 
 Quality Checklist Before Emitting
+
 - No other files touched.
 - Section order preserved.
 - No invented features or options.
@@ -74,4 +81,5 @@ Quality Checklist Before Emitting
 - Spelling & Markdown syntax valid.
 
 ## Failure Handling
+
 If you cannot confidently verify a claim, leave it unchanged unless clearly false. Do not guess.

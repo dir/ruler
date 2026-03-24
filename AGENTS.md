@@ -16,7 +16,7 @@
 
 ### Code Formatting
 
-- Always ensure that the code is formatted correctly by running prettier before committing changes.
+- Always ensure that the code is formatted correctly by running `pnpm run format` before committing changes.
 
 ### Branches and Pull Requests
 
@@ -24,8 +24,9 @@
 - Pull requests should be descriptive and clearly explain the changes being made, including the rationale behind the change, the functional changes, the specific files and modules affected.
 - Before declaring a pull request ready for review, you must ensure that all the CI tests pass. These include:
   - `pnpm install --frozen-lockfile`
+  - `pnpm run format:check`
   - `pnpm run lint`
   - `pnpm test`
   - `pnpm run build`
-- IMPORTANT: Before committing, always use Prettier to ensure that the code is formatted correctly.
+- IMPORTANT: Before committing, always run `pnpm run format`.
 - IMPORTANT: When committing yourself with `git commit`, always pass `--author="AI <ruler+ai@okigu.com>"` so that your commits can be easily identified.
