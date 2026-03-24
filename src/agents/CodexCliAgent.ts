@@ -15,8 +15,7 @@ interface McpServer {
   env?: Record<string, string>;
   url?: string;
   headers?: Record<string, string>; // Support headers from transformed remote servers
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any; // Allow additional properties from transformation
+  [key: string]: unknown; // Allow additional properties from transformation
 }
 
 interface CodexCliConfig {
@@ -97,7 +96,7 @@ export class CodexCliAgent implements IAgent {
       let existingConfig: CodexCliConfig = {};
       try {
         const existingContent = await fs.readFile(configPath, 'utf8');
-        existingConfig = parseTOML(existingContent);
+        existingConfig = parseTOML(existingContent) as CodexCliConfig;
       } catch {
         // File doesn't exist or can't be parsed, use empty config
       }

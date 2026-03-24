@@ -25,8 +25,7 @@ interface VibeMcpServer {
 interface VibeConfig {
   mcp_servers?: VibeMcpServer[];
   // Allow other properties to be preserved
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface RulerMcpServer {
@@ -174,8 +173,7 @@ export class MistralVibeAgent implements IAgent {
       }
 
       // Convert to TOML and write
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const tomlContent = stringify(updatedConfig as any);
+      const tomlContent = stringify(updatedConfig);
       await writeGeneratedFile(configPath, tomlContent);
     }
   }

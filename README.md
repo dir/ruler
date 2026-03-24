@@ -844,19 +844,20 @@ jobs:
   check-ruler:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
         with:
           version: 10.32.1
           run_install: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '22.12.0'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
 
       - name: Apply Ruler configuration
-        run: pnpm exec ruler apply --no-gitignore
+        run: node dist/cli/index.js apply --no-gitignore
 
       - name: Check for uncommitted changes
         run: |
@@ -967,6 +968,9 @@ pnpm run test:watch
 ### Code Quality
 
 ```bash
+# Check formatting
+pnpm run format:check
+
 # Run linting
 pnpm run lint
 
