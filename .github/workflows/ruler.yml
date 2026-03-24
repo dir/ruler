@@ -6,6 +6,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -39,6 +40,9 @@ jobs:
       - name: Run ruler apply
         run: node dist/cli/index.js apply --no-gitignore --no-backup --agents=agentsmd,copilot
 
+      - name: Format generated files
+        run: pnpm run format
+
       - name: Create PR for generated changes
         env:
           GH_TOKEN: ${{ github.token }}
@@ -67,6 +71,8 @@ jobs:
             else
               echo "Updated existing PR #$pr_number"
             fi
+
+            gh workflow run CI --ref "$branch"
           else
             echo "No changes"
           fi
